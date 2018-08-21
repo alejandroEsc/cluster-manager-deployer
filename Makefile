@@ -8,6 +8,7 @@ go-lint: ## quick run of linting
 
 compile: ## Compile the binaries into the ./bin directory
 	mkdir -p ./bin
+	go build -o ./bin/manager-deployer ./cmd/manager-deployer
 
 clean: ## Clean up built files
 	rm -rf ./bin

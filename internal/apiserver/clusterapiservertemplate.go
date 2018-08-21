@@ -17,6 +17,12 @@ limitations under the License.
 package apiserver
 
 const ClusterAPIAPIServerConfigTemplate = `
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Namespace }}
+---
 apiVersion: apiregistration.k8s.io/v1beta1
 kind: APIService
 metadata:
