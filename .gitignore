@@ -13,3 +13,5 @@
 
 # ignore vendor director
 vendor/
+bin/
+minikube.kubeconfig
