@@ -12,8 +12,11 @@ import (
 )
 
 const (
-	NameSpace = "cluster-api"
-	Name = "cluster-api-stack"
+
+	// launched apiserver aggregate in default namespace, cannot change at the moment.
+	nameSpace = "default"
+	// name of the aggregate apiserver
+	name      = "clusterapi"
 )
 
 func deployClusterAPICmd() *cobra.Command {
@@ -57,19 +60,19 @@ func runDeployClusterAPICmd(o *options.DeployClusterAPIOptions) error {
 		kubeconfig = string(b)
 
 		if kubeconfig == "" {
-			return fmt.Errorf("valid kubeconfig file is required.")
+			return fmt.Errorf("valid kubeconfig file is required")
 		}
 
 	} else {
 		return fmt.Errorf("valid kubeconfig file path is required")
 	}
 
-	client, err := apiserver.NewClusterClient(kubeconfig, NameSpace)
+	client, err := apiserver.NewClusterClient(kubeconfig, nameSpace)
 	if err != nil {
 		return fmt.Errorf("unable to create a kubernetes client object: %v", err)
 	}
 
-	yaml, err := apiserver.GetApiServerYaml(Name, NameSpace)
+	yaml, err := apiserver.GetApiServerYaml(name, nameSpace)
 	if err != nil {
 		return fmt.Errorf("unable to generate apiserver yaml: %v", err)
 	}
